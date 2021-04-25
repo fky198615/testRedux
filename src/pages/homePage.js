@@ -1,15 +1,17 @@
 import React  from 'react';
 
 import {Button, Card, CardDeck, Carousel, Container, Image} from 'react-bootstrap';
-import {connect} from "react-redux";
+import {connect,useSelector} from "react-redux";
 //import {add, store} from "../store";
 import store from "../redux/combineReducer";
-
+//import * as actions from '../redux/action/cartAction';
 import {addItemToCart} from "../redux/action/cartAction";
 
 
 
-const HomePage = () => {
+const HomePage = (props) => {
+
+    const productsInCart = useSelector(state => state.shoppingCartReducer);
     
     const product1 = {
         "name": "Camera",
@@ -128,7 +130,7 @@ const HomePage = () => {
                             <Card.Text>Description: CANNON EOS 80D DSLR CAMERA
                             </Card.Text>
                            <Button variant="warning"
-                                   onClick={() => store.dispatch(addItemToCart({product1}))}
+                                   onClick={() => props.addToCart(product1)}
 
                            >Add to cart
                            </Button>
@@ -145,7 +147,7 @@ const HomePage = () => {
                         <Card.Text>Description:  LOGITECH G-SERIES GAMING MOUSE
                         </Card.Text>
                         <Button variant="warning"
-                                onClick={() => addItemToCart({product2})}
+                                onClick={() => props.addToCart(product2)}
 
                         >Add to cart
                         </Button>
@@ -162,7 +164,7 @@ const HomePage = () => {
                         <Card.Text>Description: IPHONE 11 PRO 256GB MEMORY
                         </Card.Text>
                         <Button variant="warning"
-                                onClick={() => addItemToCart({product3})}
+                                onClick={() => console.log(productsInCart)}
                         >Add to cart
                         </Button>
                     </Card.Body>
@@ -192,4 +194,12 @@ const HomePage = () => {
     );
 };
 
-export default connect(null, {addItemToCart})(HomePage);
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        addToCart: (item) => {
+            dispatch(addItemToCart({item}));
+        }
+    }
+}
+
+export default connect(null, mapDispatchtoProps)(HomePage);

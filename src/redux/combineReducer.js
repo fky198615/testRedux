@@ -1,18 +1,16 @@
 import {combineReducers} from 'redux';
 import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import shoppingCartReducer from '../redux/reducer/shoppingCartReducer';
 
-const middleware = [thunk];
-
 const reducers = combineReducers({
-    shoppingCartReducer
+    shoppingCartReducer: shoppingCartReducer
 })
 
 const store = createStore(
     reducers,
-    composeWithDevTools(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
 )
 
 export default store; 

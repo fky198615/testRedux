@@ -1,8 +1,6 @@
 import {ADD_ITEM_TO_CART, REMOVE_TIEM_FROM_CART, CLEAR_THE_CART} from '../constants';
 
-const initial = [];
-
-const shoppingCartReducer = (state=initial, action) => {
+const shoppingCartReducer = (state=[], action) => {
     
     const {type, payload} = action;
     

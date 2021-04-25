@@ -12,7 +12,6 @@ import Category1Page from "./pages/category1Page";
 import Category2Page from "./pages/category2Page";
 import Category3Page from "./pages/category3Page";
 import Footer from "./component/footer";
-import store from "./redux/combineReducer";
 
 import {ProductPage} from "./pages/productPage";
 import Cart from "./component/cart";
@@ -21,10 +20,8 @@ import Product from "./component/product";
 
 function App() {
     return (
-        <Provider store={store}>
         <Router>
-            
-                <Header/>
+            <Header/>
                 <Switch>
                     <Route path='/' exact component={HomePage}/>
                     <Route path='/register' exact component={Register}/>
@@ -39,8 +36,6 @@ function App() {
                 </Switch>
                 <Footer />
         </Router>
-        </Provider>
-
     );
 }
 

@@ -8,7 +8,7 @@ import {ProductItem} from "../global";
 
 const Cart = (props) => {
     //const products = useSelector((state: ProductItem[]) => state)
-    const productsInCart = useSelector(state => state.shoppingCartReducer);
+    const productsInCart = props.itemsInCart;
     console.log("productsInCart,",productsInCart);
     return(
         <Container  className="justify-content-center p-5" >
@@ -54,5 +54,9 @@ const Cart = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    console.log("state in cart,", state);
+    return {itemsInCart: state.shoppingCartReducer};
+}
 
-export default Cart;
+export default connect(mapStateToProps, null)(Cart);
