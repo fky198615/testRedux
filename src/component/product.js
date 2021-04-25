@@ -2,9 +2,12 @@ import React from "react";
 
 import {ProductItem} from "../global";
 
-import {useSelector} from "react-redux";
+import {useSelector, connect} from "react-redux";
 import {Button, Card, Row} from "react-bootstrap";
 import {add, store} from "../store";
+import {addItemToCart} from "../redux/action/cartAction";
+
+import FormImpl from "react-bootstrap/esm/Form";
 
 const Product = () => {
 
@@ -18,7 +21,8 @@ const Product = () => {
                     <Card.Link href="/productPage"
                                key={product.id}
                                disabled={product.added}
-                               onClick={() => store.dispatch(add(product))}
+                               //onClick={() => store.dispatch(add(product))}
+                               onClick={() => addItemToCart({product})}
 
 
                     >
@@ -33,7 +37,8 @@ const Product = () => {
                         <Button variant="warning"
                                 key={product.id}
                                 disabled={product.added}
-                                onClick={() => store.dispatch(add(product))}
+                                //onClick={() => store.dispatch(add(product))}
+                                onClick={() => addItemToCart({product})}
                         >Add to cart
                         </Button>
                     </Card.Body>
@@ -44,4 +49,4 @@ const Product = () => {
 }
 
 
-export {Product};
+export default connect(null, {addItemToCart})(Product);

@@ -3,8 +3,8 @@ import React  from 'react';
 import  {Col, Container, Row } from 'react-bootstrap';
 import BrandBox from '../component/brandBox';
 
-import {Product} from "../component/product";
-import {Cart} from "../component/cart"
+import Product  from "../component/product";
+import Cart from "../component/cart"
 import {ProductPage} from "./productPage";
 
 

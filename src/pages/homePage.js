@@ -1,11 +1,45 @@
 import React  from 'react';
 
 import {Button, Card, CardDeck, Carousel, Container, Image} from 'react-bootstrap';
-import {add, store} from "../store";
+import {connect} from "react-redux";
+//import {add, store} from "../store";
+import store from "../redux/combineReducer";
+
+import {addItemToCart} from "../redux/action/cartAction";
 
 
 
 const HomePage = () => {
+    
+    const product1 = {
+        "name": "Camera",
+        "brand": "CANNON",
+        "price": "$600",
+        "description": "CANNON EOS 80D DSLR CAMERA"
+    }
+
+    const product2 = {
+        "name": "Mouse",
+        "brand": "LOGITECH",
+        "price": "$100",
+        "description": "LOGITECH G-SERIES GAMING MOUSE"
+    }
+
+    const product3 = {
+        "name": "Phone",
+        "brand": "APPLE",
+        "price": "$1000",
+        "description": "IPHONE 11 PRO 256GB MEMORY"
+    }
+
+    const product4 = {
+        "name": "Playstatio",
+        "brand": "SONY",
+        "price": "$500",
+        "description": "SONY PLAYSTATION 4 PRO WHITE VERSION"
+
+    }
+
 
 
     return (
@@ -94,6 +128,7 @@ const HomePage = () => {
                             <Card.Text>Description: CANNON EOS 80D DSLR CAMERA
                             </Card.Text>
                            <Button variant="warning"
+                                   onClick={() => store.dispatch(addItemToCart({product1}))}
 
                            >Add to cart
                            </Button>
@@ -110,6 +145,7 @@ const HomePage = () => {
                         <Card.Text>Description:  LOGITECH G-SERIES GAMING MOUSE
                         </Card.Text>
                         <Button variant="warning"
+                                onClick={() => addItemToCart({product2})}
 
                         >Add to cart
                         </Button>
@@ -126,7 +162,7 @@ const HomePage = () => {
                         <Card.Text>Description: IPHONE 11 PRO 256GB MEMORY
                         </Card.Text>
                         <Button variant="warning"
-
+                                onClick={() => addItemToCart({product3})}
                         >Add to cart
                         </Button>
                     </Card.Body>
@@ -142,7 +178,7 @@ const HomePage = () => {
                         <Card.Text>Description: SONY PLAYSTATION 4 PRO WHITE VERSION
                         </Card.Text>
                         <Button variant="warning"
-
+                                onClick={() => addItemToCart({product4})}
                         >Add to cart
                         </Button>
                     </Card.Body>
@@ -156,4 +192,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default connect(null, {addItemToCart})(HomePage);

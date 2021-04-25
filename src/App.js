@@ -1,9 +1,9 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./component/header";
 import './App.css'
-
 import HomePage from "./pages/homePage";
 import Register from "./component/register";
 import SignIn from "./component/signIn";
@@ -12,35 +12,34 @@ import Category1Page from "./pages/category1Page";
 import Category2Page from "./pages/category2Page";
 import Category3Page from "./pages/category3Page";
 import Footer from "./component/footer";
+import store from "./redux/combineReducer";
 
 import {ProductPage} from "./pages/productPage";
-import {Cart} from "./component/cart";
-import {Product} from "./component/product";
-
+import Cart from "./component/cart";
+import Product from "./component/product";
 
 
 function App() {
     return (
-
+        <Provider store={store}>
         <Router>
+            
                 <Header/>
-            <Switch>
-                <Route path='/' exact component={HomePage}/>
-                <Route path='/register' exact component={Register}/>
-                <Route path='/signIn' exact component={SignIn}/>
-
+                <Switch>
+                    <Route path='/' exact component={HomePage}/>
+                    <Route path='/register' exact component={Register}/>
+                    <Route path='/signIn' exact component={SignIn}/>
                     <Route path='/categoryPage' exact component={CategoryPage}/>
                     <Route path='/category1Page' exact component={Category1Page}/>
                     <Route path='/category2Page' exact component={Category2Page}/>
                     <Route path='/category3Page' exact component={Category3Page}/>
-                <Route path='/productPage' component={ProductPage} />
-
-                <Route path='/cart' component={Cart}/>
-                <Router path='/product/:id' component={Product}/>
-            </Switch>
-
-            <Footer />
+                    <Route path='/productPage' component={ProductPage} />
+                    <Route path='/cart' component={Cart}/>
+                    <Router path='/product/:id' component={Product}/>
+                </Switch>
+                <Footer />
         </Router>
+        </Provider>
 
     );
 }
