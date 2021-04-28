@@ -1,5 +1,5 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./component/header";
@@ -16,9 +16,19 @@ import Footer from "./component/footer";
 import {ProductPage} from "./pages/productPage";
 import Cart from "./component/cart";
 import Product from "./component/product";
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+
+import store from "../src/redux/combineReducer";
+import persistor from "../src/redux/combineReducer";
 
 
 function App() {
+    const stateInCart = useSelector(state => state.shoppingCartReducer);
+    console.log("stateInCart app.js,",stateInCart);
+    
+    const [state, setState] = useState(stateInCart);
+    
     return (
         <Router>
             <Header/>
@@ -31,7 +41,9 @@ function App() {
                     <Route path='/category2Page' exact component={Category2Page}/>
                     <Route path='/category3Page' exact component={Category3Page}/>
                     <Route path='/productPage' component={ProductPage} />
-                    <Route path='/cart' component={Cart}/>
+                    <Route path='/cart' render={(props)=>(
+                        <Cart {...props} items = {state} />
+                    )}/>
                     <Router path='/product/:id' component={Product}/>
                 </Switch>
                 <Footer />

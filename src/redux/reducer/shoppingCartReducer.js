@@ -1,5 +1,6 @@
 import {ADD_ITEM_TO_CART, REMOVE_TIEM_FROM_CART, CLEAR_THE_CART} from '../constants';
 
+
 const shoppingCartReducer = (state=[], action) => {
     
     const {type, payload} = action;
@@ -7,13 +8,14 @@ const shoppingCartReducer = (state=[], action) => {
     switch(type){
         case ADD_ITEM_TO_CART:
             console.log("state add to cart",state);
-            return [...state, payload];
+            return [...state, payload]
+            
         
         case REMOVE_TIEM_FROM_CART:
-            return state.filter(item => item !== payload);
+            return state.filter(item => item !== payload)
         
         case CLEAR_THE_CART:
-            return state = [];
+            return state = []
         
         default:
             console.log("state", state);

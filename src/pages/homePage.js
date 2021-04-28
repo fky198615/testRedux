@@ -11,7 +11,7 @@ import {addItemToCart} from "../redux/action/cartAction";
 
 const HomePage = (props) => {
 
-    const productsInCart = useSelector(state => state.shoppingCartReducer);
+    const productsInCart = props.itemsInCart;
     
     const product1 = {
         "name": "Camera",
@@ -202,4 +202,9 @@ const mapDispatchtoProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchtoProps)(HomePage);
+const mapStateToProps = (state) => {
+    console.log("state in homepage,", state);
+    return {itemsInCart: state.shoppingCartReducer};
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(HomePage);
